@@ -22,6 +22,8 @@
 
 - ***9-firstdirdeletion*** : A script that deletes a directory from a certain diretory.
 
-- *** 10-back*** : A script that changes the working directory to the previous one.
+- ***10-back*** : A script that changes the working directory to the previous one.
 
 - ***11-lists*** : Displays all the file in the current, parent and boot directory.
+
+- ***100-lets_move*** : Move all file begin with an uppercase letter to /bin/u.
