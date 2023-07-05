@@ -16,6 +16,8 @@
 				3. And hidden files (starting with .)
 - ***6-firstdirectory*** : A script that creates a directory named my_first_directory in the /tmp/ directory.
 
-- ***7-movethatfile*** : A script that moves a file from one folder to another.
+- ***7-movethatfile*** : A script that moves a file from one directory to another.
 
 - ***8-firstdelete*** : Deletes a file from a certain directory.
+
+- ***9-firstdirdeletion*** : A script that deletes a directory from a certain diretory. 
