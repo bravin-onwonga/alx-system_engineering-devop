@@ -11,7 +11,7 @@
 - ***4-listmorefiles*** : Display current directory contents, including hidden files (starting with .). Use the long format.
 
 - ***5-listfilesdigitonly*** : Display current directory contents.
-				1. Long format
+				1. Long fckormat
 				2. With user and group IDs displayed numerically
 				3. And hidden files (starting with .)
 - ***6-firstdirectory*** : A script that creates a directory named my_first_directory in the /tmp/ directory.
@@ -20,4 +20,6 @@
 
 - ***8-firstdelete*** : Deletes a file from a certain directory.
 
-- ***9-firstdirdeletion*** : A script that deletes a directory from a certain diretory. 
+- ***9-firstdirdeletion*** : A script that deletes a directory from a certain diretory.
+
+- *** 10-back*** : A script that changes the working directory to the previous one.
