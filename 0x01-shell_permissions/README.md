@@ -4,3 +4,4 @@
 - ***1-who_am_i*** : A script that when executed prints the effective name of the current user.
 - ***2-groups*** : Prints all the groups the user is in.
 - ***3-new_owner*** : Changes owner of the file <span style="color: red;">*hello*</span> to <span style="color: red;">*betty*</span>
+- ***4-empty*** : A script that creates a new file *hello*.
