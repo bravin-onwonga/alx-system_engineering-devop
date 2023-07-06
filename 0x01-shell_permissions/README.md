@@ -27,3 +27,5 @@
 - ***13-change_group*** : Change group of file *hello* to school.
 
 - ***100-change_owner_and_group*** : Change owner to **vincent** and group to **staff** for all file and subdirectores in current directory.
+
+- ***101-symbolic_link_permissions*** : Change owner to **vincent** and group to **staff** for a symbolic link ***hello***
