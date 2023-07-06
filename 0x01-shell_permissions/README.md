@@ -20,3 +20,4 @@
 
 - ***9-John_Doe*** : Sets permission for the file **hello** to -rwxr-x-wx.
 
+- ***10-mirror_permissions*** : Mirror the permissions give to file **hello** to the file **olleh**.
