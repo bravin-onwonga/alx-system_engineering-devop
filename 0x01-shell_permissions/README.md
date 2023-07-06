@@ -22,6 +22,8 @@
 
 - ***10-mirror_permissions*** : Mirror the permissions give to file **hello** to the file **olleh**.
 
-- ***11-directories_permissions*** : Give **execeute** to all users for subdirectories only.
+- ***11-directories_permissions*** : Give **execute** to all users for subdirectories only.
 
 - ***13-change_group*** : Change group of file *hello* to school.
+
+- ***100-change_owner_and_group*** : Change owner to **vincent** and group to **staff** for all file and subdirectores in current directory.
