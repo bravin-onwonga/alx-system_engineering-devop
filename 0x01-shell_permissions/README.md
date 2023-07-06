@@ -8,3 +8,4 @@
 - ***5-execute*** : Adds the **execute** permission to the owner of the file *hello*.
 - ***6-multiple_permissions*** : Owner and group owner are given *execute* permission, other users can only read.
 - ***7-everybody*** : Gives all users the execute permission.
+- ***8-James_Bond*** : No permission for owner and group owner; other users get all the permissions.
