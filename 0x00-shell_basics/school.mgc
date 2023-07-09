@@ -1,2 +1,2 @@
-#/bin/bash
-file -C -m school
+#!/bin/bash
+file -m school.mgc
