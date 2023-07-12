@@ -1,2 +1,2 @@
 #!/bin/bash
-sort -f /etc/ssh/sshd_config
+grep "^str" /etc/ssh/sshd_config
