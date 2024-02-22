@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+i=0
+echo "Hour: $i"
+while [ $i -le 13 ]
+do
+	for min in {1..59..1}
+	do
+		echo "$min"
+	done
+	(( i++ ))
+	if [ $i -lt 13 ]
+	then
+		echo "Hour: $i"
+	fi
+done
