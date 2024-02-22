@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Displays the content of the file /etc/passwd.
+len=0
+
+while read -r line
+do
+	i=0
+	while [ "$i" -lt ${#line} ]
+	do
+		if [ "${line:i:1}" = ":" ]
+		then
+			(( len++ ))
+		fi
+		(( i++ ))
+	done
+
+	echo "$line" | cut -d ':' -f1,3,$((len - 1)) | cut -d ',' -f1
+
+done < /etc/passwd
