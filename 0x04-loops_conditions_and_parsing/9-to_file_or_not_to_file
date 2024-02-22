@@ -13,7 +13,7 @@ then
 	echo "school file is not empty"
 fi
 
-if [[ -e school  &&  !(-s school) ]]
+if [[ -e school  &&  ! (-s school) ]]
 then
 	echo "school file is empty"
 fi
