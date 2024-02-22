@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Checks if a file exists, if its empty
+# and if it is a regular file
 if [ -e school ]
 then
 	echo "school file exists"

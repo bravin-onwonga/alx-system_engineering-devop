@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Prints out all the files in the curr dir
+# if an hyphen exists prints name after the hyphen
 LIST="$(ls)"
 for name in $LIST
 do
