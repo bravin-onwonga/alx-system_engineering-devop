@@ -2,7 +2,7 @@
 # Prints every minute to 12:59
 i=0
 echo "Hour: $i"
-while [ "$i" -le 13 ]
+while [ "$i" -le 12 ]
 do
 	min=1
 	while [ "$min" -le 59 ]
@@ -11,7 +11,7 @@ do
 		(( min++ ))
 	done
 	(( i++ ))
-	if [ "$i" -lt 13 ]
+	if [ "$i" -le 12 ]
 	then
 		echo "Hour: $i"
 	fi
