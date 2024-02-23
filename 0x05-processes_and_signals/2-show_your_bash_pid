@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Displays lines containing the bash word
+# shellcheck disable=SC2009
+pgrep -f bash
+read mypid
+echo "$mypid :"
+ps -e u -H -U "$mypid"
