@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Receives a signal and prints something diff
+
