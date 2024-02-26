@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 # Displays lines containing the bash word
 # shellcheck disable=SC2009
-mypid=$(pgrep -f bash)
-ps -e u -H -$mypid
+
+mypid=$(ps -ef | grep bash | grep -v grep | awk '{print $2}')
+if [ -n "$mypid" ]
+then
+	echo "$mypid bash"
+fi
