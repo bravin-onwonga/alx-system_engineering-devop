@@ -1,7 +1,3 @@
 #!/usr/bin/env bash
 # Displays PID and process name containing word
-mypid=$(pgrep -f bash)
-if [ -n "$mypid" ]
-then
-	echo "$mypid bash"
-fi
+ps -eo pid,cmd | grep bash
