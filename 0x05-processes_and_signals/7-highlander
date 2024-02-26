@@ -1,3 +1,15 @@
 #!/usr/bin/env bash
 # Receives a signal and prints something diff
 
+handle_terminate() {
+	echo "I am invincible!!!"
+}
+
+trap handle_terminate SIGTERM
+
+# Infinity loop
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
