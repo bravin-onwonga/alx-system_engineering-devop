@@ -5,5 +5,5 @@
 mypid=$(ps -ef | grep bash | grep -v grep | awk '{print $2}')
 if [ -n "$mypid" ]
 then
-	echo "$mypid bash"
+	echo "$mypid"
 fi
