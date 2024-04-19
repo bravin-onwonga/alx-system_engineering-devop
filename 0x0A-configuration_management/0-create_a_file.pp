@@ -1,3 +1,4 @@
+# Create a file with permissions and content
 file { '/tmp/school':
   ensure  => file,
   group   => 'www-data',
