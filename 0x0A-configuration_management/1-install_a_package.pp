@@ -1,5 +1,5 @@
-# Installs a package flask using pip3
-package { ['python3-pip']:
+# Installs python3-pip package
+package { 'python3-pip':
   ensure => installed,
 }
 
