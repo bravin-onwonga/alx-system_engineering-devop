@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 # Connect to a server without typing a password
 eval $(ssh-agent)
-ssh-add -p "betty" "./school"
+ssh-add "./school"
+ssh ubuntu@server01
+sshd_config="/etc/ssh/sshd_config"
+echo -e "Host *\n\tPasswordAuthentication no\n" > sshd_config
+service ssh restart
