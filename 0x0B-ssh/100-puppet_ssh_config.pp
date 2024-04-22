@@ -1,8 +1,12 @@
 # Changes to our configuration file
 file { '/etc/ssh/sshd_config':
-  ensure => present
+  ensure => present,
+  content => "Host *\n\tPasswordAuthentication no\n"
 }
 
-exec { 'add line to file':
-  command => 'echo -e "Host *\n\tPasswordAuthentication no\n" > sshd_config'
+# Restart SSH service after making changes
+service { 'ssh':
+  ensure => running,
+  enable => true,
+  require => File['/etc/ssh/sshd_config'],
 }
