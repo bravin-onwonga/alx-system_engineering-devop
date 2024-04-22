@@ -1,7 +1,7 @@
 # Connect to your server using the private key
 exec { 'connect_server" :
-  command => 'echo ssh -i ~/.ssh/school ubuntu@server01',
-  path    => '/usr/bin/echo'
+  command => 'ssh -i ~/.ssh/school ubuntu@server01',
+  path    => '/usr/bin'
 }
 
 # Changes to our configuration file
