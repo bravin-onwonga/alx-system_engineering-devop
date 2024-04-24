@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Installs nginx and route GET to a web page
+sudo apt update
+sudo apt install nginx -y
+echo "Hello World!" >> /var/html/html/index.html
+sed -i 's/^listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
+systemctl restart nginx
