@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
-# Configure your Nginx server so that /redirect_me is redirecting to another page.
-
-str_def='server_name _;'
-
-str='server_name _;
+# Define the strings for configuration
+str='
+server_name _;
 
 location /redirect_me {
   return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
 }
 '
 
+temp_file=$(mktemp)
 sudo apt update
 sudo apt install nginx -y
-sudo sed -i 's/^listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
-sudo sed -i "s|$str_def|$str|g" /etc/nginx/sites-available/default
+sudo sed -i 's|^listen\s*80;|listen 80 default_server;|g' /etc/nginx/sites-available/default
+echo "$str" > "$temp_file"
+sudo sed -i '/server_name _;/r '"$temp_file" /etc/nginx/sites-available/default
+rm "$temp_file"
 sudo nginx -s reload
