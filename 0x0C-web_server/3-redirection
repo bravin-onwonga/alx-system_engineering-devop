@@ -13,5 +13,5 @@ location /redirect_me {
 sudo apt update
 sudo apt install nginx -y
 sudo sed -i 's/^listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
-sudo sed -i "s/$str_def/$str/g" /etc/nginx/sites-available/default
+sudo sed -i "s|$str_def|$str|g" /etc/nginx/sites-available/default
 sudo nginx -s reload
