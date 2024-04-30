@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Doubles the web server for redudancy
+str='
+try_files $uri $uri\/ =404;
+add_header X-Custom-Header "X-Served-By: 03-web-02";'
+
+temp_file=$(mktemp)
+sudo apt update
+sudo apt install nginx -y
+sudo sed -i 's|^listen\s*80;|listen 80 default_server;|g' /etc/nginx/sites-available/default
+echo "$str" > "$temp_file"
+sudo sed -i '/try_files $uri $uri\/ =404;/r '"$temp_file" /etc/nginx/sites-available/default
+rm "$temp_file"
+sudo nginx -s reload
