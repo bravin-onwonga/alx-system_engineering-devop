@@ -1,6 +1,6 @@
 # Sets up a server to allow login and serve some pages and redirects
 exec { 'connect_to_server':
-  command => 'ssh ubuntu@100.25.41.52',
+  command => 'echo ssh ubuntu@100.25.41.52',
   path    => '/usr/bin/'
 }
 
@@ -56,11 +56,11 @@ file { '/etc/nginx/sites-available/default':
 
 file { '/var/www/html/index.html':
   ensure  => present,
-  content => "Hello World!"
+  content => "<h1>Hello World!<h1>"
 }
 
 exec { 'restart_ssh_service':
-  command => 'sudo service ssh restart',
-  path    => '/usr/sbin:/sbin:/usr/bin:/bin',
+  command => 'echo service ssh restart',
+  path    => '/usr/bin/',
   require => Exec['update_ssh_config']
 }
