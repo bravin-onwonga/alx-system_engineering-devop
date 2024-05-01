@@ -1,3 +1,4 @@
+# Sets up a server to allow login and serve some pages and redirects
 exec { 'connect_to_server':
   command => 'ssh ubuntu@100.25.41.52',
 }
@@ -55,6 +56,11 @@ exec { 'update_ssh_config':
 file { '/etc/nginx/sites-available/default':
   ensure  => present,
   content => $server_str,
+}
+
+file { '/var/www/html/index.html':
+  ensure  => present,
+  content => "Hello World!"
 }
 
 exec { 'add_key':
