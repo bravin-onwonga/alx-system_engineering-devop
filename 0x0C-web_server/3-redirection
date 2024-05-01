@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 # Define the strings for configuration
 str='
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+    server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
 
-    root /var/www/html;
+        root /var/www/html;
 
-    index index.html index.htm index.nginx-debian.html;
+        index index.html index.htm index.nginx-debian.html;
 
-    server_name _;
+        server_name _;
 
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        location /redirect_me {
+            return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        }
     }
-}
 '
 
 temp_file=$(mktemp)
@@ -22,5 +22,4 @@ sudo apt update
 sudo apt install nginx -y
 echo "$str" > "$temp_file"
 sudo mv "$temp_file" /etc/nginx/sites-available/default
-rm "$temp_file"
 sudo nginx -s reload

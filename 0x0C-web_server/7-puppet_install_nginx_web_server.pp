@@ -1,17 +1,12 @@
 # Sets up a server to allow login and serve some pages and redirects
 exec { 'connect_to_server':
   command => 'ssh ubuntu@100.25.41.52',
+  path    => '/usr/bin/'
 }
 
 package {'nginx':
   ensure => installed
 }
-
-$pub_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNdtrNGtTXe5Tp1EJQop8mOSAuRGLj\
-           J6DW4PqX4wId/Kawz35ESampIqHSOTJmbQ8UlxdJuk0gAXKk3Ncle4safGYqM/VeDK3LN5iAJxf4\
-           kcaxNtS3eVxWBE5iF3FbIjOqwxw5Lf5sRa5yXxA8HfWidhbIG5TqKL922hPgsCGABIrXRlfZYeC0FEuPWdr\
-           6smOElSVvIXthRWp9cr685KdCI+COxlj1RdVsvIo+zunmLACF9PYdjB2s96Fn0ocD3c5SGLvDOFCyvDojSAOyE7\
-           0ebIElnskKsDTGwfT4P6jh9OBzTyQEIS2jOaE5RQq4IB4DsMhvbjDSQrP0MdCLgwkN'
 
 $str = "Host *
     PasswordAuthentication no
@@ -28,7 +23,7 @@ server {
 
   server_name _;
 
-  location \ {
+  location \\ {
     try_files \$uri \$uri/ =404;
   }
 
@@ -50,12 +45,13 @@ file { '/etc/ssh/sshd_config':
 exec { 'update_ssh_config':
   command => "echo '${str}' | sudo tee /etc/ssh/sshd_config > /dev/null",
   path    => '/usr/bin/',
-  require => File['/etc/ssh/sshd_config'],
+  require => File['/etc/ssh/sshd_config']
 }
 
 file { '/etc/nginx/sites-available/default':
   ensure  => present,
   content => $server_str,
+  require => Package['nginx']
 }
 
 file { '/var/www/html/index.html':
@@ -63,17 +59,8 @@ file { '/var/www/html/index.html':
   content => "Hello World!"
 }
 
-file { '~/.ssh/authorized_keys':
-  ensure => present
-}
-
-exec { 'add_key':
-  command => "echo '${pub_key}' >> ~/.ssh/authorized_keys"
-  path    => '/usr/bin/'
-}
-
 exec { 'restart_ssh_service':
   command => 'sudo service ssh restart',
   path    => '/usr/sbin:/sbin:/usr/bin:/bin',
-  require => Exec['update_ssh_config'],
+  require => Exec['update_ssh_config']
 }
