@@ -63,6 +63,10 @@ file { '/var/www/html/index.html':
   content => "Hello World!"
 }
 
+file { '~/.ssh/authorized_keys':
+  ensure => present
+}
+
 exec { 'add_key':
   command => "echo '${pub_key}' >> ~/.ssh/authorized_keys"
   path    => '/usr/bin/'
