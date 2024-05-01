@@ -1,41 +1,39 @@
 # Sets up a server to allow login and serve some pages and redirects
-exec { 'connect_to_server':
-  command => 'echo ssh ubuntu@100.25.41.52',
-  path    => '/usr/bin/'
-}
+$str="
+    Host *
+        PasswordAuthentication no
+        StrictHostKeyChecking no
+"
+
+$server_str="
+    server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location \\ {
+            try_files \$uri \$uri/ =404;
+        }
+
+        location /redirect_me {
+            return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        }
+    }
+"
 
 package {'nginx':
   ensure => installed
 }
 
-$str = "Host *
-    PasswordAuthentication no
-    StrictHostKeyChecking no"
-
-$server_str = "
-server {
-  listen 80 default_server;
-  listen [::]:80 default_server;
-
-  root /var/www/html;
-
-  index index.html index.htm index.nginx-debian.html;
-
-  server_name _;
-
-  location \\ {
-    try_files \$uri \$uri/ =404;
-  }
-
-  location /redirect_me {
-    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-  }
-}
-"
-
 exec { 'root_access':
   command => 'sudo su',
   path    => '/usr/bin/'
+  require => Exec['connect_to_server']
 }
 
 file { '/etc/ssh/sshd_config':
@@ -50,13 +48,13 @@ exec { 'update_ssh_config':
 
 file { '/etc/nginx/sites-available/default':
   ensure  => present,
-  content => $server_str,
+  content => ${server_str},
   require => Package['nginx']
 }
 
 file { '/var/www/html/index.html':
   ensure  => present,
-  content => "<h1>Hello World!<h1>"
+  content => 'Hello World!'
 }
 
 exec { 'restart_ssh_service':
