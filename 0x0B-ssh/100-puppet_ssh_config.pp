@@ -3,22 +3,19 @@ exec { 'connect_to_server':
   command => 'ssh ubuntu@100.25.41.52',
 }
 
-$str = "Host *
-    PasswordAuthentication no
+$str = "
+Host *
+  PasswordAuthentication no
 
 Host client
-    HostName 100.25.41.52
-    IdentityFile ~/.ssh/school
-    User client"
+  HostName 100.25.41.52
+  IdentityFile ~/.ssh/school
+  User client
+"
 
 file { '/etc/ssh/sshd_config':
   ensure => present,
-}
-
-exec { 'update_ssh_config':
-  command => "echo \"$str\" | sudo tee /etc/ssh/sshd_config > /dev/null",
-  path    => '/usr/bin/echo',
-  require => File['/etc/ssh/sshd_config'],
+  content => $str
 }
 
 exec { 'restart_ssh_service':
