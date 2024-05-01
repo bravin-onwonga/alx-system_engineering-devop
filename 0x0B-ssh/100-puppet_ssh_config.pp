@@ -1,3 +1,4 @@
+# Configure server using puppet
 exec { 'connect_to_server':
   command => 'ssh ubuntu@100.25.41.52',
 }
@@ -14,7 +15,6 @@ file { '/etc/ssh/sshd_config':
   ensure => present,
 }
 
-# Execute command to handle task
 exec { 'update_ssh_config':
   command => "echo \"$str\" | sudo tee /etc/ssh/sshd_config > /dev/null",
   path    => '/usr/bin/echo',
