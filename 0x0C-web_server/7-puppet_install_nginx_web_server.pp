@@ -33,7 +33,6 @@ package {'nginx':
 exec { 'root_access':
   command => 'sudo su',
   path    => '/usr/bin/'
-  require => Exec['connect_to_server']
 }
 
 file { '/etc/ssh/sshd_config':
@@ -48,7 +47,7 @@ exec { 'update_ssh_config':
 
 file { '/etc/nginx/sites-available/default':
   ensure  => present,
-  content => ${server_str},
+  content => $server_str,
   require => Package['nginx']
 }
 
