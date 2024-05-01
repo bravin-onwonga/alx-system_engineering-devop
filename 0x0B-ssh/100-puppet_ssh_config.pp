@@ -1,18 +1,28 @@
-# Connect to your server using the private key
-exec { 'connect_server" :
-  command => 'ssh -i ~/.ssh/school ubuntu@server01',
-  path    => '/usr/bin'
+exec { 'connect_to_server':
+  command => 'ssh ubuntu@100.25.41.52',
 }
 
-# Changes to our configuration file
+$str = "Host *
+    PasswordAuthentication no
+
+Host client
+    HostName 100.25.41.52
+    IdentityFile ~/.ssh/school
+    User client"
+
 file { '/etc/ssh/sshd_config':
-  ensure  => present,
-  content => "Host *\n\tPasswordAuthentication no\n"
+  ensure => present,
 }
 
-# Restart SSH service after making changes
-service { 'ssh':
-  ensure  => running,
-  enable  => true,
+# Execute command to handle task
+exec { 'update_ssh_config':
+  command => "echo \"$str\" | sudo tee /etc/ssh/sshd_config > /dev/null",
+  path    => '/usr/bin/echo',
   require => File['/etc/ssh/sshd_config'],
+}
+
+exec { 'restart_ssh_service':
+  command => 'sudo service ssh restart',
+  path    => '/usr/sbin:/sbin:/usr/bin:/bin',
+  require => Exec['update_ssh_config'],
 }
