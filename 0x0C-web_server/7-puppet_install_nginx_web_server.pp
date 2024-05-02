@@ -56,8 +56,8 @@ file { '/var/www/html/index.html':
   content => "Hello World!\n"
 }
 
-exec { 'restart_ssh_service':
-  command => 'echo service ssh restart',
+exec { 'reload_ssh':
+  command => 'echo nginx -s reload',
   path    => '/usr/bin/',
-  require => Exec['update_ssh_config']
+  require => Package['nginx']
 }
