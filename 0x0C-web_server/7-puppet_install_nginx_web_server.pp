@@ -16,7 +16,7 @@ $server_str="
 
         server_name _;
 
-        location \\ {
+        location / {
             try_files \$uri \$uri/ =404;
         }
 
