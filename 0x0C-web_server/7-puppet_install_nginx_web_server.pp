@@ -56,7 +56,7 @@ file { '/var/www/html/index.html':
   content => "Hello World!\n"
 }
 
-exec { 'reload_ssh':
+exec { 'reload_nginx':
   command => 'echo nginx -s reload',
   path    => '/usr/bin/',
   require => Package['nginx']
