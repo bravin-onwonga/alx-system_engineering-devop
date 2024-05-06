@@ -7,7 +7,7 @@ str='
 
         root /var/www/mysite;
 
-        index.html;
+        index index.html;
 
         server_name _;
 
