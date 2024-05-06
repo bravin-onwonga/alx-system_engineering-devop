@@ -21,5 +21,6 @@ sudo apt install nginx -y
 sudo mkdir /var/www/mysite
 sudo echo "Hello World!" | sudo tee /var/www/mysite/index.html > /dev/null
 sudo echo $str | sudo tee /etc/nginx/sites-available/mysite > /dev/null
-sudo sed -i 's/default_server;//g' /etc/nginx/sites-available/default
+sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+sudo sed -i 's/listen [::]:80 default_server;/listen [::]:80;/g' /etc/nginx/sites-available/default
 sudo nginx -s reload
