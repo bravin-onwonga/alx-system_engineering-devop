@@ -20,6 +20,10 @@ str='
 temp_file=$(mktemp)
 sudo apt update
 sudo apt install nginx -y
-echo "$str" > "$temp_file"
-sudo mv "$temp_file" /etc/nginx/sites-available/default
+sudo mkdir -p /var/www/mysite
+sudo echo "Hello World!" | sudo tee /var/www/mysite/index.html > /dev/null
+sudo echo "$str" | sudo tee /etc/nginx/sites-available/mysite > /dev/null
+sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+sudo sed -i 's/listen [::]:80 default_server;/listen [::]:80;/g' /etc/nginx/sites-available/default
+sudo ln -s /etc/nginx/sites-available/mysite /etc/nginx/sites-enabled/
 sudo nginx -s reload

@@ -1,27 +1,7 @@
 #!/usr/bin/env bash
 # Installs nginx and route GET to a web page
-str='
-    server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-
-        root /var/www/mysite;
-
-        index index.html;
-
-        server_name _;
-
-        location / {
-            try_files $uri $uri/ =404;
-        }
-    }
-'
 sudo apt update
 sudo apt install nginx -y
-sudo mkdir -p /var/www/mysite
-sudo echo "Hello World!" | sudo tee /var/www/mysite/index.html > /dev/null
-sudo echo "$str" | sudo tee /etc/nginx/sites-available/mysite > /dev/null
-sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
-sudo sed -i 's/listen [::]:80 default_server;/listen [::]:80;/g' /etc/nginx/sites-available/default
-sudo ln -s /etc/nginx/sites-available/mysite /etc/nginx/sites-enabled/
-sudo nginx -s reload
+ufw allow 'Nginx HTTP'
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+service nginx start
