@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
 # Curling port 80 return a page that contains Hello Holberton
+echo 'Hello Holberton' | sudo tee /var/www/html/index.html
