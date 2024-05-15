@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+# Curling port 80 return a page that contains Hello Holberton
