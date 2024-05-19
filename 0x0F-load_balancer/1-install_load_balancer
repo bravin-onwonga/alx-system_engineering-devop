@@ -1,2 +1,18 @@
 #!/usr/bin/env bash
 # Installs load balancer
+str="
+frontend mysite
+    bind *:80
+    default_backend myservers
+
+backend myservers
+    balance roundrobin
+    server web-01 100.25.141.192:80
+    server web-02 54.237.117.188:80
+"
+
+sudo apt update
+sudo apt install -y haproxy
+echo 'ENABLED=1' | sudo tee -a /etc/default/haproxy
+echo "$str" | sudo tee /etc/haproxy/haproxy.cfg
+sudo service haproxy reload
