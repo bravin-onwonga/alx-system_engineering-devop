@@ -3,5 +3,10 @@
 sudo apt update
 sudo apt install nginx -y
 echo 'Hello World!' > /var/www/html/index.html
-sudo sed -i 's|server_name _;|add_header X-Served-By;\n\n\tserver_name _;\n|g' /etc/nginx/sites-available/default
+server_name=$(grep -oP 'server_name\s+\K[^;]+' /etc/nginx/sites-available/default)
+if ["$server_name" = "100.25.141.192"]; then
+    sudo sed -i 's|server_name _;|add_header X-Served-By web-01;\n\n\tserver_name _;\n|g' /etc/nginx/sites-available/default
+elif ["$server_name" = "54.237.117.188"]; then
+    sudo sed -i 's|server_name _;|add_header X-Served-By web-02;\n\n\tserver_name _;\n|g' /etc/nginx/sites-available/default
+fi
 sudo service nginx reload
