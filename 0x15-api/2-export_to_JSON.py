@@ -22,7 +22,7 @@ if __name__ == "__main__":
         user_info = requests.get(url_user).json()
         user_todos = requests.get(url_todos).json()
 
-        user_name = user_info.get('name')
+        user_name = user_info.get('username')
 
         for i in range(len(user_todos)):
             temp_dict = {}
