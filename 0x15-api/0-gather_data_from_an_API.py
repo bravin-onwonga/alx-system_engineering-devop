@@ -32,4 +32,3 @@ if __name__ == "__main__":
         for i in range(len(user_todos)):
             if (user_todos[i].get('completed')):
                 print("\t", user_todos[i].get('title'))
-
