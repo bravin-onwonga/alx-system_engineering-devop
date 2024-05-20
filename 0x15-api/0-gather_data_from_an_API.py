@@ -8,9 +8,9 @@ import sys
 
 
 if __name__ == "__main__":
-    if len(sys.argv):
+    if (len(sys.argv) and int(sys.argv[1]) <= 10):
         count = 0
-        id = str(sys.argv[1])
+        id = sys.argv[1]
         url = "https://jsonplaceholder.typicode.com/users/"
 
         url_posts = url + id + "/posts"
