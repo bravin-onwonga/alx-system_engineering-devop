@@ -27,7 +27,7 @@ if __name__ == "__main__":
             if user_todos[i].get('completed'):
                 completed = "True"
             title = user_todos[i].get('title')
-            str = "{}, {}, {}, {}\n".format(
+            str = '"{}","{}","{}","{}"\n'.format(
                 id, employee_name, completed, title)
             content = content + str
 
