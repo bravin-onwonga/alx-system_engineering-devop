@@ -26,9 +26,9 @@ if __name__ == "__main__":
 
         for i in range(len(user_todos)):
             temp_dict = {}
-            completed = "False"
+            completed = False
             if user_todos[i].get('completed'):
-                completed = "True"
+                completed = True
             title = user_todos[i].get('title')
             temp_dict['task'] = title
             temp_dict['competed'] = completed
