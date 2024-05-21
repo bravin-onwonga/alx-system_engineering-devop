@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Exports the response to csv format
+Exports the response to json file
 """
 
 import json
@@ -14,26 +14,24 @@ if __name__ == "__main__":
         my_dct = {}
         my_lst = []
         filename = id + ".json"
-        url = "https://jsonplaceholder.typicode.com/users/"
+        url = "https://jsonplaceholder.typicode.com/"
 
-        url_user = url + id
-        url_todos = url + id + "/todos"
+        url_user = url + "users?id=" + id
+        url_todos = url + "/todos"
 
         user_info = requests.get(url_user).json()
-        user_todos = requests.get(url_todos).json()
+        all_users_todos = requests.get(url_todos).json()
 
-        user_name = user_info.get('username')
+        user_name = user_info[0]['username']
 
-        for i in range(len(user_todos)):
-            temp_dict = {}
-            completed = False
-            if user_todos[i].get('completed'):
-                completed = True
-            title = user_todos[i].get('title')
-            temp_dict['task'] = title
-            temp_dict['competed'] = completed
-            temp_dict['username'] = user_name
-            my_lst.append(temp_dict)
+        for user_todos in all_users_todos:
+            if user_todos.get('userId') == int(id):
+                temp_dict = {
+                    "task": user_todos['title'],
+                    "completed": user_todos['completed'],
+                    "username": user_name
+                }
+                my_lst.append(temp_dict)
 
         with open(filename, 'w') as f:
             my_dct[id] = my_lst
