@@ -5,7 +5,6 @@ Exports the response to csv format
 
 import json
 import requests
-import sys
 
 
 if __name__ == "__main__":
@@ -18,20 +17,20 @@ if __name__ == "__main__":
     all_users_todos = requests.get(url_todos).json()
 
     for i in range(1, 11):
-        my_lst = []
-        url_user = url + "users?id=" + str(i)
+        my_dct[i] = []
+
+    for user_todos in all_users_todos:
+        temp_dict = {}
+        id = str(user_todos.get('userId'))
+        url_user = url + "users?id=" + id
         user_info = requests.get(url_user).json()
         user_name = user_info[0]['username']
-        for user_todos in all_users_todos:
-            if user_todos['userId'] == i:
-                temp_dict = {
-                    'username': user_name,
-                    'task': user_todos.get('title'),
-                    'completed': user_todos.get('completed')
-                }
-                all_users_todos.remove(user_todos)
-            my_lst.append(temp_dict)
-        my_dct[i] = my_lst
+        temp_dict = {
+            'username': user_name,
+            'task': user_todos.get('title'),
+            'completed': user_todos.get('completed')
+        }
+        my_dct[int(id)].append(temp_dict)
 
     with open(filename, 'w') as f:
         data = json.dumps(my_dct)
