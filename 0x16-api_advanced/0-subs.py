@@ -15,11 +15,11 @@ def number_of_subscribers(subreddit):
     """
     if subreddit is None:
         return 0
-    base_url = "https://reddit.com/"
-
-    url = base_url + 'r/{}'.format(subreddit) + '/about.json'
+    url = "https://reddit.com/r/{}/about.json".format(subreddit)
 
     try:
+        check = requests.head(url, allow_redirects=False)
+        check.raise_for_status()
         res = requests.get(url)
         n = int(res.json().get('data').get('subscribers'))
         return n
