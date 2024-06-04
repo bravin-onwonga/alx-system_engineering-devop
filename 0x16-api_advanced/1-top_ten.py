@@ -19,6 +19,11 @@ def top_ten(subreddit):
         check.raise_for_status()
         res = requests.get(url)
         my_lst = res.json().get('data').get('children')
+
+        if not (len(my_lst)):
+            print("None")
+            return
+
         i = 0
         for dict in my_lst:
             if i == 10:
