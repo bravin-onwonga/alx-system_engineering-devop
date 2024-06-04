@@ -17,21 +17,16 @@ def top_ten(subreddit):
     try:
         check = requests.head(url, allow_redirects=False)
         check.raise_for_status()
-        res = requests.get(url)
+        res = requests.get(url, params={'limit': '10'})
         my_lst = res.json().get('data').get('children')
 
         if not (len(my_lst)):
             print("None")
             return
 
-        i = 0
         for dict in my_lst:
-            if i == 10:
-                break
             print(dict.get('data').get('title'))
-            i += 1
         return
     except Exception:
         print("None")
         return
-
