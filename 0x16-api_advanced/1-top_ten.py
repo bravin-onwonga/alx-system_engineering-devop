@@ -10,6 +10,7 @@ def top_ten(subreddit):
     """Send a requests to find top ten posts of a subreddit
     """
     if subreddit is None:
+        print("None")
         return
     url = "https://reddit.com/r/{}/hot.json".format(subreddit)
 
