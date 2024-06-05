@@ -15,17 +15,16 @@ def top_ten(subreddit):
     url = "https://reddit.com/r/{}/hot.json".format(subreddit)
 
     try:
-        check = requests.head(url, allow_redirects=False)
-        check.raise_for_status()
-        res = requests.get(url, params={'limit': '10'})
-        my_lst = res.json().get('data').get('children')
+        res = requests.get(url, allow_redirects=False, params={'limit': '10'})
+        if res.status_code == 200:
+            my_lst = res.json().get('data').get('children')
 
-        if not (len(my_lst)):
-            print("None")
-            return
+            if not (len(my_lst)):
+                print("None")
+                return
 
-        for dict in my_lst:
-            print(dict.get('data').get('title'))
+            for dict in my_lst:
+                print(dict.get('data').get('title'))
         return
     except Exception:
         print("None")
