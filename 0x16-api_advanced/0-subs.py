@@ -18,9 +18,7 @@ def number_of_subscribers(subreddit):
     url = "https://reddit.com/r/{}/about.json".format(subreddit)
 
     try:
-        check = requests.head(url, allow_redirects=False)
-        check.raise_for_status()
-        res = requests.get(url)
+        res = requests.get(url, allow_redirects=False)
         n = int(res.json().get('data').get('subscribers'))
         return n
     except Exception:
