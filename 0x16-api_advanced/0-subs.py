@@ -16,10 +16,9 @@ def number_of_subscribers(subreddit):
     if subreddit is None:
         return 0
     url = "https://reddit.com/r/{}/about.json".format(subreddit)
-    headers = {'User-Agent': 'alx_task'}
 
     try:
-        res = requests.get(url, headers=headers, allow_redirects=False)
+        res = requests.get(url, allow_redirects=False)
         if res.status_code == 200:
             data = res.json().get('data', {})
             return data.get('subscribers', 0)
