@@ -12,7 +12,7 @@ def top_ten(subreddit):
     if subreddit is None:
         print("None")
         return
-    url = "https://reddit.com/r/{}/hot.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
 
     try:
         res = requests.get(url, allow_redirects=False, params={'limit': '10'})

@@ -10,14 +10,12 @@ def count_words(subreddit, word_list=[], my_dict={}, after=None):
     """
     Recursively sends requests to find the top posts of a subreddit
     """
-    url = "https://reddit.com/r/{}/hot.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {'User-Agent': 'alx_task'}
 
     try:
-        check = requests.head(url, allow_redirects=False)
-        check.raise_for_status()
         params = {'after': after}
-        res = requests.get(url, headers=headers, params=params)
+        res = requests.get(url, headers=headers, params=params, allow_redirects=False)
         data = res.json().get('data')
         new_dict = {}
 
