@@ -1,0 +1,39 @@
+# Default server configuration
+#
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        index index.html index.htm index.nginx-debian.html 102-index.html;
+
+        add_header X-Served-By web-01;
+
+        server_name 100.25.141.192;
+        location /hbnb_static/ {
+                alias /data/web_static/current/;
+        }
+
+        rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                proxy_pass http://127.0.0.1:5003/2-hbnb;
+        }
+        location /static/ {
+                alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+        }
+
+        location /airbnb-onepage/ {
+                proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
+        }
+
+        location ~ /number_odd_or_even/(\d+)$ {
+                set $n $1;
+                proxy_pass http://127.0.0.1:5001/number_odd_or_even/$n;
+        }
+
+        location /api/ {
+                proxy_pass http://127.0.0.1:5002/api/;
+        }
+}
