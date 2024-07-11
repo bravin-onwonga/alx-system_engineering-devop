@@ -7,7 +7,7 @@ fi
 
 find_info() {
     if [[ -z $subdomain ]]; then
-        subslst=("www" "web-01" "web-02" "lb-01");
+        subslst=("www" "lb-01" "web-01" "web-02");
     else
         subslst=("$subdomain");
     fi
