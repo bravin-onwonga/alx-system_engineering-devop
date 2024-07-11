@@ -14,8 +14,8 @@ find_info() {
 
     for sub in "${subslst[@]}"
     do
-      type=$(dig +noall +answer bravinonwonga.tech | awk '{print $4}');
-      IP=$(dig +noall +answer bravinonwonga.tech | awk '{print $5}');
+      type=$(dig +noall +answer $sub.$domain | awk '{print $4}');
+      IP=$(dig +noall +answer $sub.$domain | awk '{print $5}');
       echo "The subdomain $sub is a $type record and points to $IP"
     done
 }
