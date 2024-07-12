@@ -3,7 +3,7 @@
 
 if [ $# -eq 0 ];then
 	echo 'Usage ./5-mysql_backup <password>'
-	return
+	exit 0
 fi
 
 password=$1
