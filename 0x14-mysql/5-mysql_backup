@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+# Create a mysql dump file for all dbs and compress it
+
+if [ $# -eq 0 ];then
+	echo 'Usage ./5-mysql_backup <password>'
+	return
+fi
+
+password=$1
+
+mysqldump --host=localhost --user root --password=$password --all-databases > backup.sql
+
+backup_dir=$(date +'%m-%d-%Y')
+
+tar czf $backup_dir.tar.gz backup.sql
+
