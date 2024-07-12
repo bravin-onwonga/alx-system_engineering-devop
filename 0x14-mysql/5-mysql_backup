@@ -1,4 +1,4 @@
- #!/usr/bin/env bash
+#!/usr/bin/env bash
 # Create a mysql dump file for all dbs and compress it
 
 if [ $# -eq 0 ];then
